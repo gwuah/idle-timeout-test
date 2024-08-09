@@ -1,0 +1,28 @@
+# fly.toml app configuration file generated for longconnection on 2024-08-09T11:32:17+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'longconnection'
+primary_region = 'ams'
+
+[deploy]
+  strategy = 'rolling'
+
+[build]
+  [build.args]
+    GO_VERSION = '1.22.5'
+
+[http_service]
+  internal_port = 8192
+  force_https = true
+  min_machines_running = 0
+  processes = ['app']
+
+  [http_service.http_options]
+    idle_timeout = 600
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
